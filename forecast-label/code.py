@@ -17,20 +17,21 @@ test_2 = pd.read_excel(r'D:\Study\机器学习\数据\test_2.xlsx')
 
 # 选取训练集及对应测试集，第一种是直接对应columns选取
 # train_x = train_1[['mcv平均红细胞体积','alkphos碱性磷酸酶','sgpt谷丙转氨酶','sgot 天门冬氨酸转氨酶','gammagtγ-谷氨酰转肽酶','drinks']]
-# train_y = train_1[['selector肝病']]
+# train_y = train_1['selector肝病']
 # test_x = test_1[['mcv平均红细胞体积','alkphos碱性磷酸酶','sgpt谷丙转氨酶','sgot 天门冬氨酸转氨酶','gammagtγ-谷氨酰转肽酶','drinks']]
 train_x = train_2[['Sex','Length','Diameter','Height','Whole weight','Shucked weight','Viscera weight','Shell weight']]
-train_y = train_2[['Rings']]
+train_y = train_2['Rings']
 test_x = test_2[['Sex','Length','Diameter','Height','Whole weight','Shucked weight','Viscera weight','Shell weight']]
 
 # 第二种是使用drop进行删除不想选取的columns
 # train_x = train_1.drop(columns=['selector肝病'])
-# train_y = train_1[['selector肝病']]
+# train_y = train_1['selector肝病']
 # test_x = test_1.drop(columns=['selector肝病'])
 
 # train_x = train_2.drop(columns=['Rings'])
-# train_y = train_2[['Rings']]
+# train_y = train_2['Rings']
 # test_x = test_2.drop(columns=['Rings'])
+
 
 x_train = np.array(train_x)
 y_train = np.array(train_y)
@@ -68,6 +69,13 @@ forest.fit(x_train, y_train)
 y_test = forest.predict(x_test)
 
 
-# 输出表格
+# 输出数据到test表格中
+# test_1['label'] = y_test
+# test_1.to_excel('D:/Study/机器学习/数据/test_1.xlsx', index=False)
+# test_2['label'] = y_test
+# test_2.to_excel('D:/Study/机器学习/数据/test_2.xlsx', index=False)
+
+# 输出数据到新表格中
 test = pd.DataFrame(y_test,columns=['label'])
-test.to_excel('D:/Study/机器学习/数据/test2.xlsx')
+# test.to_excel('D:/Study/机器学习/数据/test1.xlsx', index=False)
+test.to_excel('D:/Study/机器学习/数据/test2.xlsx', index=False)
